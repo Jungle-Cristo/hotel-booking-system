@@ -1,0 +1,58 @@
+spring:
+  # 数据库配置
+  datasource:
+    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:hotel_booking}?useSSL=false&serverTimezone=UTC
+    username: ${DB_USER:root}
+    password: ${DB_PASSWORD:123456}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # HikariCP连接池配置
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 5
+      connection-timeout: 30000
+
+  # Redis配置
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: ${REDIS_PORT:6379}
+    password: ${REDIS_PASSWORD:}
+    database: 0
+
+  # 安全配置
+  security:
+    user:
+      name: admin
+      password: admin
+
+# MyBatis Plus配置
+mybatis-plus:
+  mapper-locations: classpath:mapper/**/*.xml
+  type-aliases-package: com.hotelbooking.entity
+  global-config:
+    db-config:
+      id-type: auto
+
+# 服务器配置
+server:
+  port: ${SERVER_PORT:8080}
+  servlet:
+    context-path: /api
+
+# JWT配置
+jwt:
+  secret: ${JWT_SECRET:hotel_booking_secret_key}
+  expiration: 86400000 # 24小时
+  header: Authorization
+
+# 日志配置
+logging:
+  level:
+    com.hotelbooking: info
+
+# Knife4j配置
+knife4j:
+  enable: true
+  openapi:
+    title: 酒店预订系统API
+    description: 酒店预订系统后端接口文档
+    version: 1.0.0
